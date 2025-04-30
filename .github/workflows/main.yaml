@@ -24,38 +24,27 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Install and Repair WinGet on GitHub Runner
+    - name: Install DevOpsMigration CLI via Chocolatey
       shell: powershell
       run: |
-        $progressPreference = 'silentlyContinue'
-        Write-Host "Installing WinGet PowerShell module from PSGallery..."
-        Install-PackageProvider -Name NuGet -Force | Out-Null
-        Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery -AllowClobber | Out-Null
-        Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-        Repair-WinGetPackageManager
-        Write-Host "Done."
-
-    - name: Install DevOpsMigration CLI using WinGet
-      shell: powershell
-      run: |
-        winget install --id=nakedAgility.DevOpsMigrationTools --accept-source-agreements --accept-package-agreements
+        choco install devopsmigrationtools -y
 
     - name: Modify configuration.json from template
       shell: powershell
       run: |
         $config = Get-Content "configuration.json" | ConvertFrom-Json
 
-        # Inject Source Configuration
+        # Inject Source Config
         $config.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
         $config.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
         $config.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
 
-        # Inject Target Configuration (destination org is hardcoded)
+        # Inject Target Config
         $config.MigrationTools.Endpoints.Target.Collection = "https://dev.azure.com/balraj-test-org/"
         $config.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
         $config.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
 
-        # Save modified config
+        # Save config
         $config | ConvertTo-Json -Depth 100 | Out-File "config.json" -Encoding utf8
 
     - name: Run DevOps Migration
