@@ -23,13 +23,11 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
-
     - name: Download DevOps Migration Tools ZIP
       run: |
         Invoke-WebRequest `
-          -Uri "https://github.com/nkdAgility/azure-devops-migration-tools/releases/latest/download/portable.zip" `
+          -Uri "https://github.com/nkdAgility/azure-devops-migration-tools/releases/download/13.10.30.0/portable.zip" `
           -OutFile "migrationtools.zip"
-
     - name: Extract DevOps Migration Tools
       run: Expand-Archive -Path "migrationtools.zip" -DestinationPath "migration"
 
