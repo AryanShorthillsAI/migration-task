@@ -1,6 +1,13 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import time
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SOURCE_PAT = os.getenv("SOURCE_PAT")
+DEST_PAT = os.getenv("DEST_PAT")
 
 SOURCE_ORG = "anand-test-org"
 SOURCE_PROJECT = "anand-projectB"
