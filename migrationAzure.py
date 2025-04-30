@@ -61,13 +61,35 @@ def create_initial_work_item(title, tags, assigned_to):
     resp.raise_for_status()
     return resp.json()["id"]
 
-def update_work_item_fields(wi_id, state, description):
+def update_work_item_fields(wi_id, state, description, fields,priority=None, activity=None, remaining_work=None):
     url = f"https://dev.azure.com/{DEST_ORG}/{DEST_PROJECT}/_apis/wit/workitems/{wi_id}?api-version=7.1"
     payload = []
     if state in {"To Do", "Doing", "In Progress"}:
         payload.append({"op": "add", "path": "/fields/System.State", "value": state})
     if description:
         payload.append({"op": "add", "path": "/fields/System.Description", "value": description})
+    if priority is not None:
+        payload.append({"op": "add", "path": "/fields/Microsoft.VSTS.Common.Priority", "value": priority})
+    if activity:
+        payload.append({"op": "add", "path": "/fields/Microsoft.VSTS.Common.Activity", "value": activity})
+    if remaining_work is not None:
+        payload.append({"op": "add", "path": "/fields/Microsoft.VSTS.Scheduling.RemainingWork", "value": remaining_work})
+
+    # Custom fields
+    custom_field_map = {
+        "Custom.EffortHours": "Effort Hours",
+        "Microsoft.VSTS.Scheduling.StartDate": "Start Date",
+        "Microsoft.VSTS.Scheduling.DueDate": "Due Date",
+        "Custom.RevisedDueDate": "Revised Due Date",
+        "Custom.PlannedType": "Planned Type",
+        "Custom.IntegratedinBuild": "Integrated in Build"
+    }
+
+    for api_field, readable_name in custom_field_map.items():
+        value = fields.get(api_field)
+        if value:
+            payload.append({"op": "add", "path": f"/fields/{api_field}", "value": value})
+    
     resp = requests.patch(url, headers=HEADERS, json=payload, auth=get_auth(DEST_PAT))
     resp.raise_for_status()
 
@@ -97,6 +119,9 @@ def migrate_all():
             title = wi["fields"]["System.Title"]
             state = wi["fields"].get("System.State", "To Do")
             description = wi["fields"].get("System.Description", "")
+            priority = wi["fields"].get("Microsoft.VSTS.Common.Priority")
+            activity = wi["fields"].get("Microsoft.VSTS.Common.Activity")
+            remaining_work = wi["fields"].get("Microsoft.VSTS.Scheduling.RemainingWork")
             assigned_to = wi["fields"].get("System.AssignedTo", {}).get("displayName")
             tags = wi["fields"].get("System.Tags", "")
 
@@ -106,7 +131,7 @@ def migrate_all():
 
             new_id = create_initial_work_item(title, tags, assigned_to)
             time.sleep(1)  # Give Azure time to save the new item
-            update_work_item_fields(new_id, state, description)
+            update_work_item_fields(new_id, state, description, wi["fields"], priority, activity, remaining_work)
             migrate_comments(wi_id, new_id)
             print(f"✅ Migrated work item {wi_id} → {new_id}")
 
@@ -117,3 +142,4 @@ def migrate_all():
 
 if __name__ == "__main__":
     migrate_all()
+    
