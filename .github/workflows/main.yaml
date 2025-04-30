@@ -1,4 +1,4 @@
-name: DevOps Migration via PowerShell CLI
+name: DevOps Migration via CLI
 
 on:
   workflow_dispatch:
@@ -21,32 +21,44 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Repo
+    - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up .NET and install DevOpsMigration tool
-      shell: pwsh
+    - name: Install and Repair WinGet on GitHub Runner
+      shell: powershell
       run: |
-        dotnet new tool-manifest
-        dotnet tool install devopsmigration
+        $progressPreference = 'silentlyContinue'
+        Write-Host "Installing WinGet PowerShell module from PSGallery..."
+        Install-PackageProvider -Name NuGet -Force | Out-Null
+        Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery -AllowClobber | Out-Null
+        Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+        Repair-WinGetPackageManager
+        Write-Host "Done."
 
-    - name: Modify config.json from template
-      shell: pwsh
+    - name: Install DevOpsMigration CLI using WinGet
+      shell: powershell
       run: |
-        $json = Get-Content "configuration.json" | ConvertFrom-Json
+        winget install --id=nakedAgility.DevOpsMigrationTools --accept-source-agreements --accept-package-agreements
 
-        # Inject source details
-        $json.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
-        $json.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
-        $json.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
-
-        # Inject target details
-        $json.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
-        $json.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
-
-        $json | ConvertTo-Json -Depth 100 | Out-File "config.json" -Encoding utf8
-
-    - name: Run Migration
-      shell: pwsh
+    - name: Modify configuration.json from template
+      shell: powershell
       run: |
-        dotnet tool run devopsmigration execute -c config.json
+        $config = Get-Content "configuration.json" | ConvertFrom-Json
+
+        # Inject Source Configuration
+        $config.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
+        $config.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
+        $config.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
+
+        # Inject Target Configuration (destination org is hardcoded)
+        $config.MigrationTools.Endpoints.Target.Collection = "https://dev.azure.com/balraj-test-org/"
+        $config.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
+        $config.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
+
+        # Save modified config
+        $config | ConvertTo-Json -Depth 100 | Out-File "config.json" -Encoding utf8
+
+    - name: Run DevOps Migration
+      shell: powershell
+      run: |
+        devopsmigration execute -c config.json
