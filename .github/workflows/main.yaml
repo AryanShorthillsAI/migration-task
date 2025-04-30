@@ -1,0 +1,52 @@
+name: DevOps Migration via PowerShell CLI
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_org:
+        description: "Source Azure DevOps Organization Name"
+        required: true
+        type: string
+      source_project:
+        description: "Source Project Name"
+        required: true
+        type: string
+      destination_project:
+        description: "Destination Project Name"
+        required: true
+        type: string
+
+jobs:
+  run-migration:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Modify config.json from template
+      shell: pwsh
+      run: |
+        $json = Get-Content "configuration.json" | ConvertFrom-Json
+
+        # Inject source details
+        $json.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
+        $json.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
+        $json.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
+
+        # Inject target details
+        $json.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
+        $json.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
+
+        # Write final config
+        $json | ConvertTo-Json -Depth 100 | Out-File "config.json" -Encoding utf8
+
+    - name: Install DevOpsMigration CLI
+      shell: pwsh
+      run: |
+        winget install --id=nakedAgility.DevOpsMigrationTools --accept-source-agreements --accept-package-agreements
+
+    - name: Run Migration
+      shell: pwsh
+      run: |
+        devopsmigration execute -c config.json
