@@ -1,4 +1,4 @@
-name: DevOps Migration via CLI
+name: Azure DevOps Migration
 
 on:
   workflow_dispatch:
@@ -21,33 +21,34 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout Repo
       uses: actions/checkout@v3
 
-    - name: Install DevOpsMigration CLI via Chocolatey
-      shell: powershell
+    - name: Download DevOps Migration Tools ZIP
       run: |
-        choco install devopsmigrationtools -y
+        Invoke-WebRequest `
+          -Uri "https://github.com/nkdAgility/azure-devops-migration-tools/releases/latest/download/portable.zip" `
+          -OutFile "migrationtools.zip"
 
-    - name: Modify configuration.json from template
-      shell: powershell
+    - name: Extract DevOps Migration Tools
+      run: Expand-Archive -Path "migrationtools.zip" -DestinationPath "migration"
+
+    - name: Generate config.json dynamically
+      shell: pwsh
       run: |
-        $config = Get-Content "configuration.json" | ConvertFrom-Json
+        $config = Get-Content ".\configuration.json" | ConvertFrom-Json
 
-        # Inject Source Config
         $config.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
         $config.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
         $config.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
 
-        # Inject Target Config
         $config.MigrationTools.Endpoints.Target.Collection = "https://dev.azure.com/balraj-test-org/"
         $config.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
         $config.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
 
-        # Save config
-        $config | ConvertTo-Json -Depth 100 | Out-File "config.json" -Encoding utf8
+        $config | ConvertTo-Json -Depth 100 | Out-File ".\migration\config.json" -Encoding utf8
 
-    - name: Run DevOps Migration
+    - name: Run Migration
       shell: powershell
-      run: |
-        devopsmigration execute -c config.json
+      run: .\migration\devopsmigration.exe execute -c config.json
+      working-directory: ./migration
