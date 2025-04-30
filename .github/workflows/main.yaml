@@ -1,0 +1,23 @@
+name: Manual Migration Runner
+
+on:
+  workflow_dispatch:  
+
+jobs:
+  run-migration-tool:
+    runs-on: windows-latest  # GitHub-hosted Windows runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'  # or 7.0.x if using .NET 7
+
+      - name: Install Azure DevOps Migration Tools
+        run: dotnet tool install --global VstsSyncMigrator.Console
+
+      - name: Run Migration using configuration.json
+        run: devopsmigration execute -c ./configuration.json
