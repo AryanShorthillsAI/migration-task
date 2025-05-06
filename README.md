@@ -1,6 +1,6 @@
 # Migration Task
 
-This repository provides a Python-based solution for migrating data from one project in a given organization to another project in another organzation on  Azure DevOps board. It includes a configurable script that reads data from the source project and migrates it to the destination project.
+This repository provides solution based on naked agility for migrating data from one project in a given organization to another project in another organzation on  Azure DevOps board. It includes a configurable script that reads data from the source project and migrates it to the destination project.
 
 ## Features
 
