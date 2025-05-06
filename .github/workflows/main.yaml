@@ -39,7 +39,7 @@ jobs:
       - name: Replace secrets in configuration file
         run: |
 
-          $template = Get-Content configuration.template.json -Raw
+          $template = Get-Content configuration.json -Raw
           $template = $template -replace '__SOURCE_ORG__', "${{ inputs.source_organization }}"
           $template = $template -replace '__SOURCE_PROJECT__', "${{ inputs.source_project }}"
           $template = $template -replace '__SOURCE_PAT__', "${{ secrets.SOURCE_PAT }}"
