@@ -1,52 +1,54 @@
-name: Azure DevOps Migration
+name: Manual Migration Trigger
 
 on:
   workflow_dispatch:
     inputs:
-      source_org:
-        description: "Source Azure DevOps Organization Name"
+      source_organization:
+        description: 'Name of the source organization'
         required: true
+        default: 'Unique-organisation'
         type: string
       source_project:
-        description: "Source Project Name"
+        description: 'Name of the source project'
         required: true
+        default: 'Unique'
         type: string
       destination_project:
-        description: "Destination Project Name"
+        description: 'Name of the destination project'
         required: true
+        default: 'Unique'
         type: string
-
+      
 jobs:
   run-migration:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v3
-    - name: Download DevOps Migration Tools ZIP
-      run: |
-        Invoke-WebRequest `
-          -Uri "https://github.com/nkdAgility/azure-devops-migration-tools/releases/download/13.10.30.0/portable.zip" `
-          -OutFile "migrationtools.zip"
-    - name: Extract DevOps Migration Tools
-      run: Expand-Archive -Path "migrationtools.zip" -DestinationPath "migration"
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Install winget
+        uses: Cyberboss/install-winget@v1
+          
+      - name: Download Azure DevOps Migration Tools
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/nkdAgility/azure-devops-migration-tools/releases/download/v16.1.0/MigrationTools-16.1.0.zip" -OutFile "migration.zip"
+          Expand-Archive -Path "migration.zip" -DestinationPath "migration-tools"
+        shell: pwsh
 
-    - name: Generate config.json dynamically
-      shell: pwsh
-      run: |
-        $config = Get-Content ".\configuration.json" | ConvertFrom-Json
+      - name: Replace secrets in configuration file
+        run: |
 
-        $config.MigrationTools.Endpoints.Source.Collection = "https://dev.azure.com/${{ github.event.inputs.source_org }}/"
-        $config.MigrationTools.Endpoints.Source.Project = "${{ github.event.inputs.source_project }}"
-        $config.MigrationTools.Endpoints.Source.Authentication.AccessToken = "${{ secrets.SOURCE_PAT }}"
+          $template = Get-Content configuration.template.json -Raw
+          $template = $template -replace '__SOURCE_ORG__', "${{ inputs.source_organization }}"
+          $template = $template -replace '__SOURCE_PROJECT__', "${{ inputs.source_project }}"
+          $template = $template -replace '__SOURCE_PAT__', "${{ secrets.SOURCE_PAT }}"
+          $template = $template -replace '__TARGET_PROJECT__', "${{ inputs.destination_project }}"
+          $template = $template -replace '__TARGET_PAT__', "${{ secrets.DESTINATION_PAT }}"
+          Set-Content -Path configuration.json -Value $template
+        shell: pwsh
 
-        $config.MigrationTools.Endpoints.Target.Collection = "https://dev.azure.com/balraj-test-org/"
-        $config.MigrationTools.Endpoints.Target.Project = "${{ github.event.inputs.destination_project }}"
-        $config.MigrationTools.Endpoints.Target.Authentication.AccessToken = "${{ secrets.DESTINATION_PAT }}"
-
-        $config | ConvertTo-Json -Depth 100 | Out-File ".\migration\config.json" -Encoding utf8
-
-    - name: Run Migration
-      shell: powershell
-      run: .\migration\devopsmigration.exe execute -c config.json
-      working-directory: ./migration
+      - name: Run Migration Tool
+        run: |
+          ./migration-tools/devopsmigration.exe execute -c configuration.json
+        shell: pwsh
