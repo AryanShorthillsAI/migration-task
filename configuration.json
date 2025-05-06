@@ -7,11 +7,11 @@
     "Endpoints": {
       "Source": {
         "EndpointType": "TfsTeamProjectEndpoint",
-        "Collection": "https://dev.azure.com/anand-test-org/",
-        "Project": "anand-projectB",
+        "Collection": "https://dev.azure.com/__SOURCE_ORG__/",
+        "Project": "__SOURCE_PROJECT__",
         "Authentication": {
           "AuthenticationMode": "AccessToken",
-          "AccessToken": ""
+          "AccessToken": "__SOURCE_PAT__"
         },
         "ReflectedWorkItemIdField": "Custom.ReflectedWorkItemId",
         "LanguageMaps": {
@@ -21,11 +21,11 @@
       },
       "Target": {
         "EndpointType": "TfsTeamProjectEndpoint",
-        "Collection": "https://dev.azure.com/balraj-test-org/",
-        "Project": "balraj-projectB",
+        "Collection": "https://dev.azure.com/ShorthillsAi/",
+        "Project": "__TARGET_PROJECT__",
         "Authentication": {
           "AuthenticationMode": "AccessToken",
-          "AccessToken": ""
+          "AccessToken": "__TARGET_PAT__"
         },
         "ReflectedWorkItemIdField": "Custom.ReflectedWorkItemId",
         "LanguageMaps": {
