@@ -121,7 +121,7 @@ The documentation for the preview is on [Preview](https://nkdagility.com/docs/az
    git push
    ```
    
-## Perfomring Migration
+## Performing Migration
 
 - Open your github repo -> Go to the repository -> Actions Tab -> select the workflow -> Run Workflow -> provide input paramters.
    
