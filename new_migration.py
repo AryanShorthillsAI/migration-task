@@ -3,11 +3,20 @@ from requests.auth import HTTPBasicAuth
 import time
 from dotenv import load_dotenv
 import os
+from collections import defaultdict
+import json
+from tqdm import tqdm
 
 load_dotenv()
 
 SOURCE_PAT = os.getenv("SOURCE_PAT")
 DEST_PAT = os.getenv("DEST_PAT")
+
+# SOURCE_ORG = "Pedegree"
+# SOURCE_PROJECT = "PedegreeWebApp"
+
+# DEST_ORG = "ShorthillsAi"
+# DEST_PROJECT = "DemoPedigreeWebApp"
 
 SOURCE_ORG = "anand-test-org"
 SOURCE_PROJECT = "anand-projectB"
@@ -22,20 +31,20 @@ HEADERS = {
 def get_auth(pat):
     return HTTPBasicAuth("", pat)
 
-def get_work_items():
-    url = f"https://dev.azure.com/{SOURCE_ORG}/{SOURCE_PROJECT}/_apis/wit/wiql?api-version=7.1"
+def get_work_items(org=SOURCE_ORG, project=SOURCE_PROJECT, pat=SOURCE_PAT):
+    url = f"https://dev.azure.com/{org}/{project}/_apis/wit/wiql?api-version=7.1"
     query = {
-        "query": f"SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = '{SOURCE_PROJECT}'"
+        "query": f"SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = '{project}'"
     }
-    resp = requests.post(url, json=query, auth=get_auth(SOURCE_PAT))
+    resp = requests.post(url, json=query, auth=get_auth(pat))
     resp.raise_for_status()
     ids = [item["id"] for item in resp.json()["workItems"]]
-    print(f"🔍 Found {len(ids)} work items to migrate.")
+    print(f"🔍 Found {len(ids)} work items in {org}/{project}.")
     return ids
 
-def get_work_item_details(wi_id):
-    url = f"https://dev.azure.com/{SOURCE_ORG}/_apis/wit/workitems/{wi_id}?$expand=all&api-version=7.1"
-    resp = requests.get(url, auth=get_auth(SOURCE_PAT))
+def get_work_item_details(wi_id, org=SOURCE_ORG, pat=SOURCE_PAT):
+    url = f"https://dev.azure.com/{org}/_apis/wit/workitems/{wi_id}?$expand=all&api-version=7.1"
+    resp = requests.get(url, auth=get_auth(pat))
     resp.raise_for_status()
     return resp.json()
 
@@ -247,26 +256,28 @@ def migrate_and_get_id_mapping():
             title = wi["fields"]["System.Title"]
             state = wi["fields"].get("System.State", "To Do")
             description = wi["fields"].get("System.Description", "")
+            priority = wi["fields"].get("Microsoft.VSTS.Common.Priority")
+            activity = wi["fields"].get("Microsoft.VSTS.Common.Activity")
+            remaining_work = wi["fields"].get("Microsoft.VSTS.Scheduling.RemainingWork")
             assigned_to = wi["fields"].get("System.AssignedTo", {}).get("displayName")
             tags = wi["fields"].get("System.Tags", "")
-
             # Check if work item already exists in destination
             existing_id = find_existing_work_item_by_title(title)
 
             if existing_id:
-                print(f"⚠️ Work item '{title}' already exists. Mapping source {source_id} → existing {existing_id}")
+                # print(f"⚠️ Work item '{title}' already exists. Mapping source {source_id} → existing {existing_id}")
                 id_mapping[source_id] = existing_id
                 continue
 
             # # Create new destination work item
-            # dest_id = create_initial_work_item(title, tags, assigned_to)
-            # id_mapping[source_id] = dest_id
+            dest_id = create_initial_work_item(title, tags, assigned_to)
+            id_mapping[source_id] = dest_id
 
-            # time.sleep(1)  # Give time for Azure DevOps to save
-            # update_work_item_fields(dest_id, state, description)
-            # migrate_comments(source_id, dest_id)
+            time.sleep(1)  # Give time for Azure DevOps to save
+            update_work_item_fields(dest_id, state, description)
+            migrate_comments(source_id, dest_id)
 
-            # print(f"✅ Migrated work item {source_id} → {dest_id}")
+            print(f"✅ Migrated work item {source_id} → {dest_id}")
 
         except Exception as e:
             print(f"❌ Failed to migrate work item {source_id}: {e}")
@@ -351,6 +362,13 @@ def verify_migration(id_mapping):
     source_items = get_work_items()
     missing_in_dest = []
     mismatched_items = []
+    mismatched_type_count = defaultdict(int)
+
+
+    os.makedirs("source", exist_ok=True)
+    os.makedirs("destination", exist_ok=True)
+
+    mismatch_index = 1
 
     for source_id in source_items:
         if source_id not in id_mapping:
@@ -358,16 +376,26 @@ def verify_migration(id_mapping):
             continue
 
         dest_id = id_mapping[source_id]
-        source_details = get_work_item_details(source_id)
-        dest_details = get_work_item_details(dest_id)
+        source_details = get_work_item_details(source_id, SOURCE_ORG, SOURCE_PAT)
+        dest_details = get_work_item_details(dest_id, DEST_ORG, DEST_PAT)
+
 
         # Compare key fields
         fields_to_check = [
-            "System.Title",
-            "System.State",
-            "System.Description",
-            "System.Tags",
-            "System.AssignedTo"
+        "System.Title",
+        # "System.State",
+        "System.Description",
+        "System.Tags",
+        "System.AssignedTo",  # use .get("displayName") for comparison
+        # "System.History",
+        # "Microsoft.VSTS.Common.Activity",
+        # "Microsoft.VSTS.Common.Priority",
+        # "Microsoft.VSTS.Scheduling.DueDate",
+        # "Microsoft.VSTS.Scheduling.StartDate",
+        # "Custom.EffortHours",
+        # "Custom.RevisedDueDate",
+        # "Custom.PlannedType",
+        # "System.Parent"
         ]
 
         mismatched = False
@@ -388,15 +416,71 @@ def verify_migration(id_mapping):
         if mismatched:
             mismatched_items.append(source_id)
 
+            # Write full JSONs to respective folders
+            with open(f"source/mism_item_{mismatch_index}.json", "w") as f_src:
+                json.dump(source_details, f_src, indent=2)
+
+            with open(f"destination/mism_item_{mismatch_index}.json", "w") as f_dest:
+                json.dump(dest_details, f_dest, indent=2)
+
+            mismatch_index += 1
+
+            # mismatched_items.append(source_id)
+            work_item_type = source_details["fields"].get("System.WorkItemType", "Unknown")
+            mismatched_type_count[work_item_type] += 1
+
     print(f"\n🔍 Verification Summary:")
     print(f"❌ Missing in destination: {len(missing_in_dest)} items")
     print(f"⚠️  Mismatched data: {len(mismatched_items)} items")
 
+    if mismatched_type_count:
+        print("📊 Mismatches by Work Item Type:")
+        for witype, count in mismatched_type_count.items():
+            print(f"   - {witype}: {count}")
+
     return missing_in_dest, mismatched_items
 
+from tqdm import tqdm  # Ensure this import is at the top of your script
+
+def delete_all_work_items():
+    """
+    Deletes all work items from the destination project.
+    Use with caution — this is irreversible.
+    """
+    print("⚠️ Starting deletion of all work items in destination project...")
+
+    # Fetch work item IDs
+    url = f"https://dev.azure.com/{DEST_ORG}/{DEST_PROJECT}/_apis/wit/wiql?api-version=7.1"
+    query = {
+        "query": f"SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = '{DEST_PROJECT}'"
+    }
+    resp = requests.post(url, json=query, auth=get_auth(DEST_PAT))
+    resp.raise_for_status()
+
+    work_item_ids = [item["id"] for item in resp.json().get("workItems", [])]
+
+    if not work_item_ids:
+        print("ℹ️ No work items found in destination project.")
+        return
+
+    print(f"🗑️ Deleting {len(work_item_ids)} work items...")
+
+    for wid in tqdm(work_item_ids, desc="🗑️ Deleting", unit="item"):
+        delete_url = f"https://dev.azure.com/{DEST_ORG}/_apis/wit/workitems/{wid}?api-version=7.1"
+        del_resp = requests.delete(delete_url, auth=get_auth(DEST_PAT))
+        if del_resp.status_code == 200:
+            tqdm.write(f"✅ Deleted work item ID {wid}")
+        else:
+            tqdm.write(f"❌ Failed to delete work item ID {wid}: {del_resp.status_code} - {del_resp.text}")
+
+    print("🧹 Deletion complete.")
+
+
+
 if __name__ == "__main__":
+    # delete_all_work_items()
     id_mapping= migrate_and_get_id_mapping()
-    print(id_mapping)
-    migrate_all(id_mapping)
-    missing, mismatched = verify_migration(id_mapping)
+    # print(id_mapping)
+    # migrate_all(id_mapping)
+    # missing, mismatched = verify_migration(id_mapping)
 

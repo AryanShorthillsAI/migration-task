@@ -1,0 +1,137 @@
+{
+  "id": 25,
+  "rev": 1,
+  "fields": {
+    "System.Id": 25,
+    "System.AreaId": 8,
+    "System.AreaPath": "anand-projectB",
+    "System.TeamProject": "anand-projectB",
+    "System.NodeName": "anand-projectB",
+    "System.AreaLevel1": "anand-projectB",
+    "System.Rev": 1,
+    "System.AuthorizedDate": "2025-04-29T09:44:56.43Z",
+    "System.RevisedDate": "9999-01-01T00:00:00Z",
+    "System.IterationId": 5,
+    "System.IterationPath": "anand-projectB",
+    "System.IterationLevel1": "anand-projectB",
+    "System.WorkItemType": "Task",
+    "System.State": "To Do",
+    "System.Reason": "Added to backlog",
+    "System.AssignedTo": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.CreatedDate": "2025-04-29T09:44:56.43Z",
+    "System.CreatedBy": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.ChangedDate": "2025-04-29T09:44:56.43Z",
+    "System.ChangedBy": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.AuthorizedAs": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.PersonId": 233213951,
+    "System.Watermark": 51,
+    "System.CommentCount": 0,
+    "System.Title": "link-test-8",
+    "Microsoft.VSTS.Common.StateChangeDate": "2025-04-29T09:44:56.43Z",
+    "Microsoft.VSTS.Common.Priority": 2,
+    "Microsoft.VSTS.Scheduling.StartDate": "2025-04-29T09:43:01.58Z",
+    "Microsoft.VSTS.Scheduling.DueDate": "2025-04-29T09:43:01.58Z",
+    "Custom.EffortHours": 4,
+    "Custom.RevisedDueDate": "2025-04-29T09:43:01.58Z",
+    "Custom.PlannedType": "Planned",
+    "System.Parent": 24
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Reverse",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/24",
+      "attributes": {
+        "isLocked": false,
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/27",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/28",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/25"
+    },
+    "workItemUpdates": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/25/updates"
+    },
+    "workItemRevisions": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/25/revisions"
+    },
+    "workItemComments": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/25/comments"
+    },
+    "html": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_workitems/edit/25"
+    },
+    "workItemType": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItemTypes/Task"
+    },
+    "fields": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/fields"
+    }
+  },
+  "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/25"
+}

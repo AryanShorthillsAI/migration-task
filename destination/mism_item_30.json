@@ -1,0 +1,164 @@
+{
+  "id": 243,
+  "rev": 4,
+  "fields": {
+    "System.Id": 243,
+    "System.AreaId": 4,
+    "System.AreaPath": "balraj-projectB",
+    "System.TeamProject": "balraj-projectB",
+    "System.NodeName": "balraj-projectB",
+    "System.AreaLevel1": "balraj-projectB",
+    "System.Rev": 4,
+    "System.AuthorizedDate": "2025-05-22T07:48:50.283Z",
+    "System.RevisedDate": "9999-01-01T00:00:00Z",
+    "System.IterationId": 1,
+    "System.IterationPath": "balraj-projectB",
+    "System.IterationLevel1": "balraj-projectB",
+    "System.WorkItemType": "Epic",
+    "System.State": "To Do",
+    "System.Reason": "Added to backlog",
+    "System.AssignedTo": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Adfe52e55-a331-4d3a-a7d1-ec33b4725b1f/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.CreatedDate": "2025-04-30T08:46:41.217Z",
+    "System.CreatedBy": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Adfe52e55-a331-4d3a-a7d1-ec33b4725b1f/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.ChangedDate": "2025-05-22T07:48:50.283Z",
+    "System.ChangedBy": {
+      "displayName": "Migration",
+      "id": null
+    },
+    "System.AuthorizedAs": {
+      "displayName": "Aryan",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Adfe52e55-a331-4d3a-a7d1-ec33b4725b1f/_apis/Identities/d76d2c31-2e42-6670-bc2f-42d4fec42dde",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZDc2ZDJjMzEtMmU0Mi03NjcwLWJjMmYtNDJkNGZlYzQyZGRl"
+        }
+      },
+      "id": "d76d2c31-2e42-6670-bc2f-42d4fec42dde",
+      "uniqueName": "aryan2@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/balraj-test-org/_apis/GraphProfile/MemberAvatars/aad.ZDc2ZDJjMzEtMmU0Mi03NjcwLWJjMmYtNDJkNGZlYzQyZGRl",
+      "descriptor": "aad.ZDc2ZDJjMzEtMmU0Mi03NjcwLWJjMmYtNDJkNGZlYzQyZGRl"
+    },
+    "System.PersonId": 5645601,
+    "System.Watermark": 1017,
+    "System.CommentCount": 1,
+    "System.Title": "Naked Agility",
+    "System.BoardColumn": "To Do",
+    "System.BoardColumnDone": false,
+    "Microsoft.VSTS.Common.StateChangeDate": "2025-05-22T07:47:48.363Z",
+    "Microsoft.VSTS.Common.Priority": 2,
+    "Microsoft.VSTS.Scheduling.TargetDate": "2025-04-30T14:16:00Z",
+    "Microsoft.VSTS.Scheduling.StartDate": "2025-04-17T10:05:00Z",
+    "Custom.ReflectedWorkItemId": "https://dev.azure.com/anand-test-org/anand-projectB/_workitems/edit/35",
+    "WEF_F1C3FB6728F34D48B2C5ACA9B1E3E13B_System.ExtensionMarker": true,
+    "WEF_F1C3FB6728F34D48B2C5ACA9B1E3E13B_Kanban.Column": "To Do",
+    "WEF_F1C3FB6728F34D48B2C5ACA9B1E3E13B_Kanban.Column.Done": false,
+    "System.Description": "<div>hello </div>",
+    "System.Parent": 245
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/242",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/240",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/241",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/231",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/236",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/237",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Reverse",
+      "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/245",
+      "attributes": {
+        "isLocked": false,
+        "name": "Parent"
+      }
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/243"
+    },
+    "workItemUpdates": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/243/updates"
+    },
+    "workItemRevisions": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/243/revisions"
+    },
+    "workItemComments": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/243/comments"
+    },
+    "html": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_workitems/edit/243"
+    },
+    "workItemType": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItemTypes/Epic"
+    },
+    "fields": {
+      "href": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/fields"
+    }
+  },
+  "url": "https://dev.azure.com/balraj-test-org/65f9fcea-63c0-4dfc-a0c6-29f1a3a6c3f0/_apis/wit/workItems/243"
+}

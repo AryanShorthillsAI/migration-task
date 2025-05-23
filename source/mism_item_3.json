@@ -1,0 +1,137 @@
+{
+  "id": 6,
+  "rev": 1,
+  "fields": {
+    "System.Id": 6,
+    "System.AreaId": 8,
+    "System.AreaPath": "anand-projectB",
+    "System.TeamProject": "anand-projectB",
+    "System.NodeName": "anand-projectB",
+    "System.AreaLevel1": "anand-projectB",
+    "System.Rev": 1,
+    "System.AuthorizedDate": "2025-04-28T12:36:11.887Z",
+    "System.RevisedDate": "9999-01-01T00:00:00Z",
+    "System.IterationId": 5,
+    "System.IterationPath": "anand-projectB",
+    "System.IterationLevel1": "anand-projectB",
+    "System.WorkItemType": "Task",
+    "System.State": "To Do",
+    "System.Reason": "Added to backlog",
+    "System.AssignedTo": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.CreatedDate": "2025-04-28T12:36:11.887Z",
+    "System.CreatedBy": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.ChangedDate": "2025-04-28T12:36:11.887Z",
+    "System.ChangedBy": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.AuthorizedAs": {
+      "displayName": "Nishant Choudhary",
+      "url": "https://spsprodcin3.vssps.visualstudio.com/Afc1e95bc-a2ab-4261-8c0a-6236eb067179/_apis/Identities/e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+        }
+      },
+      "id": "e3b4e45e-d2b8-6f6f-998d-78ea8bbdcaca",
+      "uniqueName": "nishant.choudhary@shorthills.ai",
+      "imageUrl": "https://dev.azure.com/anand-test-org/_apis/GraphProfile/MemberAvatars/aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh",
+      "descriptor": "aad.ZTNiNGU0NWUtZDJiOC03ZjZmLTk5OGQtNzhlYThiYmRjYWNh"
+    },
+    "System.PersonId": 233213951,
+    "System.Watermark": 20,
+    "System.CommentCount": 0,
+    "System.Title": "test by nishant",
+    "Microsoft.VSTS.Common.StateChangeDate": "2025-04-28T12:36:11.887Z",
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Parent": 7
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/9",
+      "attributes": {
+        "isLocked": false,
+        "name": "Child"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Reverse",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/7",
+      "attributes": {
+        "isLocked": false,
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "AttachedFile",
+      "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/attachments/d6db4224-10f3-48b5-b327-4c481187c9a2",
+      "attributes": {
+        "authorizedDate": "2025-04-28T12:36:11.887Z",
+        "id": 108121,
+        "resourceCreatedDate": "2025-04-28T12:35:15.09Z",
+        "resourceModifiedDate": "2025-04-28T12:35:15.09Z",
+        "revisedDate": "9999-01-01T00:00:00Z",
+        "resourceSize": 1621247,
+        "name": "ChatGPT.png"
+      }
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/6"
+    },
+    "workItemUpdates": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/6/updates"
+    },
+    "workItemRevisions": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/6/revisions"
+    },
+    "workItemComments": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/6/comments"
+    },
+    "html": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_workitems/edit/6"
+    },
+    "workItemType": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItemTypes/Task"
+    },
+    "fields": {
+      "href": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/fields"
+    }
+  },
+  "url": "https://dev.azure.com/anand-test-org/3b809b89-96e1-4429-82a1-2ad2e9c7d51d/_apis/wit/workItems/6"
+}

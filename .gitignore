@@ -2,3 +2,4 @@ myenv/
 .env
 get_count.py
 test_exp_process.py
+test_migrationAzure.py
