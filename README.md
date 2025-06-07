@@ -123,5 +123,5 @@ The documentation for the preview is on [Preview](https://nkdagility.com/docs/az
    
 ## Performing Migration
 
-- Open your github repo -> Go to the repository -> Actions Tab -> select the workflow -> Run Workflow -> provide input paramters.
+- Open your github repo -> Go to the repository -> Actions Tab -> select the workflow -> Run Workflow -> provide input paramters..
    
